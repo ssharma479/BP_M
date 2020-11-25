@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>New Age </title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+  <!-- Plugin CSS -->
+  <link rel="stylesheet" href="device-mockups/device-mockups.min.css">
+
+  <!-- Custom styles for this template -->
+  <link href="css/new-age.min.css" rel="stylesheet">
+  <script src="./lib/js/fhir-client.js"></script>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.css"rel="stylesheet" type="text/css">
+
+  <script src="./lib/js/get-data-test.js"></script>
+<!--<script src="./lib/js/get-data.js"></script>-->
+
+</head>
+
+<body id="page-top">
+ 
+  <section id="help">
+    <div><h2>How to use a home blood pressure monitor</h2>
+      <ul>
+          <li>
+         
+          <strong>Be still.</strong>
+          Don't smoke, drink caffeinated beverages or exercise within 30 minutes before measuring your blood pressure. Empty your bladder and ensure at least 5 minutes of quiet rest before measurements.&nbsp;</li>
+          <li><strong>Sit correctly.
+          </strong>Sit with your back straight and supported (on a dining chair, rather than a sofa). Your feet should be flat on the floor and your legs should not be crossed. Your arm should be supported on a flat surface (such as a table) with the upper arm at heart level. Make sure the bottom of the cuff is placed directly above the bend of the elbow. Check your monitor's instructions for an illustration or have your healthcare provider show you how.</li>
+          <li><strong>Measure at the same time every day.</strong>
+          It’s important to take the readings at the same time each day, such as morning and evening. It is best to take the readings daily however ideally beginning 2 weeks after a change in treatment and during the week before your next appointment.</li>
+          <li><strong>Take multiple readings and record the results</strong>.
+          Each time you measure, take two or three readings one minute apart and record the results.</li>
+          <li><strong>Don't take the measurement over clothes.</strong></li>
+      </ul>
+     <h2>Know your numbers</h2>
+     <table class="table" style="width: 100%;">
+          <thead>
+              <tr style="font-size: 12px; color: #ffffff; background-color: #4e5152;">
+                  <th id="bpc" class="text-center" style="height: 50px;   padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">BLOOD PRESSURE CATEGORY</th>
+                  <th id="sys" class="text-center" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">SYSTOLIC mm Hg<br>
+                  (upper number)</th>
+                  <td>&nbsp;</td>
+                  <th id="dia" class="text-center" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">DIASTOLIC mm Hg<br>
+                  (lower number)</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr style="font-size: 12px; color: #000000; background-color: #a6ce39;">
+                  <th id="norm" class="text-middle" headers="bpc" style="height: 50px;   padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">NORMAL</th>
+                  <th class="text-middle" headers="norm sys" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">LESS THAN 120</th>
+                  <th class="text-middle" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">and</th>
+                  <th class="text-middle" headers="norm dia" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">LESS THAN 80</th>
+              </tr>
+              <tr style="font-size: 12px; color: #000000; background-color: #ffec00;">
+                  <th id="pre" class="text-middle" headers="bpc" style="height: 50px;   padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">ELEVATED</th>
+                  <th class="text-middle" headers="pre sys" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">120 – 129</th>
+                  <th class="text-middle" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">and</th>
+                  <th class="text-middle" headers="pre dia" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">LESS THAN 80</th>
+              </tr>
+              <tr style="font-size: 12px; color: #000000; background-color: #ffb600;">
+                  <th id="hbp1" class="text-middle" headers="bpc" style="height: 50px;   padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">HIGH BLOOD PRESSURE<br>
+                  (HYPERTENSION) STAGE 1</th>
+                  <th class="text-middle" headers="hbp1 sys" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">130 – 139</th>
+                  <th class="text-middle" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">or</th>
+                  <th class="text-middle" headers="hbp1 dia" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">80 – 89</th>
+              </tr>
+              <tr style="font-size: 12px; color: #fff; background-color: #ba3a02;">
+                  <th id="hbp2" class="text-middle" headers="bpc" style="height: 50px;   padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">HIGH BLOOD PRESSURE<br>
+                  (HYPERTENSION) STAGE 2</th>
+                  <th class="text-middle" headers="hbp2 sys" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">140 OR HIGHER</th>
+                  <th class="text-middle" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">or</th>
+                  <th class="text-middle" headers="hbp2 dia" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">90 OR HIGHER</th>
+              </tr>
+              <tr style="font-size: 12px; color: #fff; background-color: #990711;">
+                  <th id="htc" class="text-middle" headers="bpc" style="height: 50px;   padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;"><a href="/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/hypertensive-crisis-when-you-should-call-911-for-high-blood-pressure" style="color: #fff; text-decoration: underline;">HYPERTENSIVE CRISIS</a> <br>
+                  (consult your doctor immediately)</th>
+                  <th class="text-middle" headers="htc sys" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">HIGHER THAN 180</th>
+                  <th class="text-middle" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">and/or</th>
+                  <th class="text-middle" headers="htc dia" style="padding-bottom: 8px; padding-top: 8px; padding-left: 8px;  padding-right: 8px;border: medium none;">HIGHER THAN 120</th>
+              </tr>
+          </tbody>
+      </table>
+      <p>Note: A diagnosis of high blood pressure must be confirmed with a medical professional. A doctor should also evaluate any unusually low blood pressure readings.</p>
+      <h2>If you get a high blood pressure reading</h2>
+      <ul>
+          <li>A single high reading is not an immediate cause for alarm. If you get a reading that is slightly or moderately higher than normal, take your blood pressure a few more times and consult your healthcare professional to verify if there’ s a health concern or whether there may be any issues with your monitor.</li>
+          <li>If your blood pressure readings suddenly exceed 180/120 mm Hg, wait five minutes and test again. If your readings are still unusually high, contact your doctor immediately. You could be experiencing a <a href="/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/hypertensive-crisis-when-you-should-call-911-for-high-blood-pressure">hypertensive crisis</a>.</li>
+          <li>If your blood pressure is higher than 180/120 mm Hg and you are experiencing signs of possible organ damage such as chest pain, shortness of breath, back pain, numbness/weakness, change in vision, difficulty speaking, do not wait to see if your pressure comes down on its own. Call 911.</li>
+      </ul>
+      <h2>AHA Recommendation</h2>
+      <p>The American Heart Association recommends home monitoring for all people with high blood pressure to help the healthcare provider determine whether treatments are working. Home monitoring (self-measured blood pressure) is not a substitute for regular visits to your physician. If you have been prescribed <a href="/en/health-topics/high-blood-pressure/changes-you-can-make-to-manage-high-blood-pressure/types-of-blood-pressure-medications">medication</a>&nbsp;to lower your blood pressure, don't stop taking your medication without consulting your doctor, even if your blood pressure readings are in the normal range during home monitoring.</p>
+      <h2>Choosing a home blood pressure monitor</h2>
+      <p>The American Heart Association recommends an automatic, cuff-style, bicep (upper-arm) monitor.</p>
+      <ul>
+          <li>Wrist and finger monitors are not recommended because they yield less reliable readings.</li>
+          <li>Choose a monitor that has been validated. If you are unsure, ask your doctor or pharmacist for advice.</li>
+          <li>When selecting a blood pressure monitor for a senior, pregnant woman or child, make sure it is validated for these conditions.</li>
+          <li>Make sure the cuff fits — measure around your upper arm and choose a monitor that comes with the correct size cuff.</li>
+      </ul>
+      <h3>Once you’ve purchased your monitor, bring it to your next appointment</h3>
+      <p>Have your doctor check to see that you are using it correctly and getting the same results as the equipment in the office. Plan to bring your monitor in once a year to make sure the readings are accurate.</p>
+      <h2>Home blood pressure monitoring may be especially useful for:</h2>
+      <ul>
+          <li>Anyone diagnosed with <a href="/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/what-is-high-blood-pressure">high blood pressure</a>&nbsp;(HBP or hypertension).</li>
+          <li>Individuals starting high blood pressure treatment to determine its effectiveness.</li>
+          <li>People requiring closer monitoring, especially individuals with <a href="/en/health-topics/high-blood-pressure/why-high-blood-pressure-is-a-silent-killer/know-your-risk-factors-for-high-blood-pressure">risk factors for high blood pressure</a>&nbsp;and/or conditions&nbsp; related to high blood pressure.&nbsp;</li>
+          <li><a href="/en/health-topics/high-blood-pressure/why-high-blood-pressure-is-a-silent-killer/high-blood-pressure-and-women">Pregnant women</a>,&nbsp;experiencing pregnancy-induced hypertension and/or preeclampsia.&nbsp;</li>
+          <li>Evaluating potentially false readings, like:
+          <ul>
+              <li>People who only have high readings at the doctor’ s office (“white coat” hypertension).&nbsp;</li>
+              <li>People who only have high readings at home but not at the doctor’ s office (“masked” hypertension).</li>
+          </ul>
+          </li>
+          <li>NOTE: People with <a href="/en/health-topics/atrial-fibrillation">atrial fibrillation</a>&nbsp;or other <a href="/en/health-topics/arrhythmia">arrhythmias</a>&nbsp;may not be good candidates for home monitoring because electronic home blood pressure devices may not be able to give accurate measurements. Ask your doctor to recommend a monitoring method that works for you.</li>
+      </ul>
+      <h2>Left-arm vs. right-arm blood pressure</h2>
+      <p>Several studies have been done to determine what is a normal variation between right and left arm. In general, any difference of 10 mm Hg or less is considered normal and is not a cause for concern.</p>
+      <h2>Why keep a blood pressure journal?</h2>
+      <p>One blood pressure measurement is like a snapshot. It only tells what your blood pressure is at that moment. A record of readings taken over time provides a “time-lapse” picture of your blood pressure that can help you <a href="/en/health-topics/high-blood-pressure/changes-you-can-make-to-manage-high-blood-pressure/partnering-with-your-doctor-to-treat-high-blood-pressure">partner with your physician</a>&nbsp;to ensure that your <a href="/en/health-topics/high-blood-pressure/changes-you-can-make-to-manage-high-blood-pressure">treatments</a>&nbsp; to lower <a href="/en/health-topics/high-blood-pressure/the-facts-about-high-blood-pressure/what-is-high-blood-pressure">high blood pressure</a>&nbsp; (HBP or hypertension) are working.</p></div>
+      
+          </div>
+  </section>
+
+</body>
+
+</html>
